@@ -10,6 +10,8 @@ import SwiftUI
 
 //MARK: - Flight Status
 public enum FlightStatus: Equatable, Codable {
+    
+    
     case delayed
     case onTime
     case preparing
@@ -19,7 +21,29 @@ public enum FlightStatus: Equatable, Codable {
     case arrived
     case `unknown`(String?)
     
-    var label: String {
+    public var synthesizedRawValue: String {
+        switch self {
+        case .delayed:
+            return "delayed"
+        case .onTime:
+            return "onTime"
+        case .preparing:
+            return "preparing"
+        case .cancelled:
+            return "cancelled"
+        case .outbound:
+            return "outbound"
+        case .inbound:
+            return "inbound"
+        case .arrived:
+            return "arrived"
+        case .unknown(let string):
+            return string ?? "unknown"
+        }
+    }
+
+    
+    public var label: String {
         switch self {
         case .delayed:
             return "Flight delayed"
