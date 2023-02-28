@@ -14,7 +14,7 @@ public class FlightsAPI {
     
     public static let shared = FlightsAPI()
     
-    func getAllFlights(for date: Date = Date()) async throws -> [CommonFlight] {
+    public func getAllFlights(for date: Date = Date()) async throws -> [CommonFlight] {
         guard Calendar.current.isDateInToday(date) else {
             throw APIError.dateError("Date must be today, currently the API does not support fetching past or future flights")
         }
