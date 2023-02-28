@@ -95,11 +95,17 @@ class FlightAPI {
     }
     
     private func request(for endpoint: Endpoint) -> URLRequest {
-        var req = URLRequest(url: endpoint.url)
+        var urlComps = URLComponents(string: endpoint.url.absoluteString)
+        urlComps?.queryItems = endpoint.queryItems
+        
+        guard let url = urlComps?.url else {
+            fatalError("Could not construct URL from components")
+        }
+        
+        var req = URLRequest(url: url)
         req.httpMethod = endpoint.method
         req.addValue("gzip, defalte, br", forHTTPHeaderField: "Accept-Encoding")
         req.addValue("application/json", forHTTPHeaderField: "Accept")
-        req.url?.append(queryItems: endpoint.queryItems)
         
         return req
     }
