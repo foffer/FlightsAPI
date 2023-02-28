@@ -6,13 +6,13 @@ enum APIError: Error {
     case dateError(String)
 }
 
-class FlightAPI {
+public class FlightsAPI {
     
     private let decoder = JSONDecoder()
     private let session = URLSession.shared
     private let logger = Logger(subsystem: "com.cewbed.roster-schedule", category: "flight-api")
     
-    static let shared = FlightAPI()
+    public static let shared = FlightsAPI()
     
     func getAllFlights(for date: Date = Date()) async throws -> [CommonFlight] {
         guard Calendar.current.isDateInToday(date) else {
